@@ -8,11 +8,12 @@ import { DepartmentComponent } from './components/department/department.componen
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
   {path:'login',component:LoginComponent},
-  // Here weather you will give department or dashboard directly it will redirect to headerComponent + 
+  // Here whether you will give department or dashboard directly it will redirect to headerComponent + 
   // when you will give empty string then it will redirect to Login Component only not to HeaderComponent
+  //after giving router-outer in header component , that time department & dashboard will be visible below header in same page
   {path:'',component:HeaderComponent,children:[
+    {path:'department',component:DepartmentComponent},
     {path:'dashboard',component:DashboardComponent},
-    {path:'department',component:DepartmentComponent}
   ]},
 
 ];
