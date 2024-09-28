@@ -8,12 +8,35 @@ import { MasterService } from 'src/app/services/master.service';
 })
 export class DashboardComponent implements OnInit {
   deptList: any[] = [];
-
+  newDeptObj: any = {
+    deptId: 0,
+    deptName: '',
+    deptHeadEmpId: 0,
+    createdDate: '',
+  };
   constructor(private masterService: MasterService) {}
   ngOnInit(): void {
-    this.getDeptList();
+    this.getAllDeptList();
   }
-  getDeptList() {
+  saveDept() {
+    debugger;
+    this.masterService.createDepartment(this.newDeptObj).subscribe((res) => {
+      debugger;
+      if (res.result) {
+        alert(`Department Created Successfully`);
+        this.getAllDeptList();
+        this.newDeptObj={
+          deptId: 0,
+          deptName: '',
+          deptHeadEmpId: 0,
+          createdDate: '',
+        };
+      }else{
+        alert(res.message);
+      }
+    });
+  }
+  getAllDeptList() {
     this.masterService.getAllDepartment().subscribe((response) => {
       debugger;
       this.deptList = response.data;
