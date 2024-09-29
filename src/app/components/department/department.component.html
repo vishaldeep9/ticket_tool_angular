@@ -1,1 +1,62 @@
-<p>department works!</p>
+<div class="row">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header bg-success">Department List</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>SI NO</th>
+                    <th>Department Name</th>
+                    <th>Created Date</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dept of deptList;let i=index">
+                      <td>{{i+1}}</td>
+                      <td>{{dept.deptName}}</td>
+                      <td>{{dept.createdDate | date:'dd-MMM-YYYY'}}</td>
+                      <td class="text-center">
+                          <!-- <button  class="btn btn-info">View</button> -->
+                          <button class="btn btn-primary"(click)="onEdit(dept)">Edit</button>
+                          <button class="btn btn-danger mx-2"(click)="onDelete(dept.deptId)">Delete</button>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header bg-success">New Department</div>
+        <div class="card-body">
+          <div class="row">
+              <div class="col-12">
+                  <label for="">Department Name</label>
+                  <input type="text" class="form-control" placeholder="department name" [(ngModel)]="newDeptObj.deptName">
+              </div>
+              <div class="col-12">
+                  <label for="" *ngIf="newDeptObj.deptId==0">Date Of Creation</label>
+                  <input type="date" class="form-control" [(ngModel)]="newDeptObj.createdDate" *ngIf="newDeptObj.deptId==0">
+              </div>
+          </div>
+          <div class="row pt-3">
+              <div class="col-6 text-center">
+                  <button class="btn btn-secondary">Reset</button>
+              </div>
+              <div class="col-6 text-center">
+                  <button [ngClass]="newDeptObj.deptId==0?'btn btn-success':'btn btn-warning'" (click)="newDeptObj.deptId==0?saveDept():updateDept()">{{newDeptObj.deptId==0 ?'Save Dept':'Update Dept'}}</button>
+              </div>
+          </div>
+          <!-- {{newDeptObj|json}} -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,1 +1,80 @@
-<p>parentcategory works!</p>
+<div class="row">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header bg-success">Parent Category List</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>SI NO</th>
+                  <th>Category Name</th>
+                  <th>Department Name</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cat of gridList; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ cat.categoryName }}</td>
+                  <td>{{ cat.deptName }}</td>
+                  <td class="text-center">
+                    <button class="btn btn-primary" (click)="onEdit(cat)">Edit
+                    </button>
+                    <button class="btn btn-danger mx-2"
+                      (click)="onDelete(cat.categoryId)">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header bg-success">New Category</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <label for>Category Name</label>
+            <input type="text" class="form-control"
+              [(ngModel)]="newObj.categoryName" />
+          </div>
+          <div class="col-12 p-2" *ngIf="newObj.categoryId == 0">
+            <!-- & we are using deptId at the time of creating new parent category, and categoryId is an primary key (so it will be create automatically by backend) -->
+            <label for>Department</label>
+            <select [(ngModel)]="newObj.deptId" class="form-select">
+              <option value>Select Dept</option>
+              <option [value]="dept.deptId" *ngFor="let dept of deptList">
+                {{ dept.deptName }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-6 text-center">
+            <button class="btn btn-secondary">Reset</button>
+          </div>
+          <div class="col-6 text-center">
+            <button [ngClass]="
+                newObj.categoryId == 0 ? 'btn btn-success' : 'btn btn-warning'
+              " (click)="newObj.categoryId == 0 ? save() : update()">
+              {{
+              newObj.categoryId == 0
+              ? "Save Dept"
+              : "Update
+              Dept"
+              }}
+            </button>
+          </div>
+        </div>
+        <!-- {{newObj|json}} -->
+      </div>
+    </div>
+  </div>
+</div>

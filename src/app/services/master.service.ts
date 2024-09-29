@@ -29,4 +29,18 @@ export class MasterService {
     debugger;
     return this.http.delete(`${this.baseUrl}DeleteDepartment?id=${id}`);
   }
+    //^ -------Parent Category---------------------------------
+    getAllpCategory(): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}GetParentCategory`);
+    }
+    createpCategory(object: any): Observable<any> {
+      return this.http.post(`${this.baseUrl}CreateParentCategory`, object);
+    }
+    updatepCategory(object: any): Observable<any> {
+      return this.http.put(`${this.baseUrl}UpdateParentCategory`, object);
+    }
+    deletepCategoryById(id:number): Observable<any> {
+      debugger;
+      return this.http.delete(`${this.baseUrl}DeleteParentCategory?id=${id}`);
+    }
 }

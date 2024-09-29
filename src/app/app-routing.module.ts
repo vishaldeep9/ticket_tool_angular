@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DepartmentComponent } from './components/department/department.component';
+import { ParentcategoryComponent } from './components/parentcategory/parentcategory.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'',component:HeaderComponent,children:[
     {path:'department',component:DepartmentComponent},
     {path:'dashboard',component:DashboardComponent},
+    {path:'parent-category',component:ParentcategoryComponent}
   ]},
 
 ];
