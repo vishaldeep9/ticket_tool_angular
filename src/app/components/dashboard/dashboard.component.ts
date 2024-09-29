@@ -25,6 +25,25 @@ export class DashboardComponent implements OnInit {
       if (res.result) {
         alert(`Department Created Successfully`);
         this.getAllDeptList();
+        // after form submission, doing form field empty
+        this.newDeptObj={
+          deptId: 0,
+          deptName: '',
+          deptHeadEmpId: 0,
+          createdDate: '',
+        };
+      }else{
+        alert(res.message);
+      }
+    });
+  }
+  updateDept() {
+    debugger;
+    this.masterService.updateDepartment(this.newDeptObj).subscribe((res) => {
+      debugger;
+      if (res.result) {
+        alert(`Department Updated Successfully`);
+        this.getAllDeptList();
         this.newDeptObj={
           deptId: 0,
           deptName: '',
@@ -38,6 +57,7 @@ export class DashboardComponent implements OnInit {
   }
   onEdit(dept: any){
     this.newDeptObj=dept;
+    
   }
   getAllDeptList() {
     this.masterService.getAllDepartment().subscribe((response) => {

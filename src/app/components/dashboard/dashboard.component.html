@@ -51,7 +51,7 @@
                 <button class="btn btn-secondary">Reset</button>
             </div>
             <div class="col-6 text-center">
-                <button [ngClass]="newDeptObj.deptId==0?'btn btn-success':'btn btn-warning'" (click)="saveDept()">{{newDeptObj.deptId==0 ?'Save Dept':'Update Dept'}}</button>
+                <button [ngClass]="newDeptObj.deptId==0?'btn btn-success':'btn btn-warning'" (click)="newDeptObj.deptId==0?saveDept():updateDept()">{{newDeptObj.deptId==0 ?'Save Dept':'Update Dept'}}</button>
             </div>
         </div>
         <!-- {{newDeptObj|json}} -->
