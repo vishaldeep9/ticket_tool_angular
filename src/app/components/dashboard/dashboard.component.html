@@ -21,7 +21,7 @@
                     <td>{{dept.createdDate | date:'dd-MMM-YYYY'}}</td>
                     <td class="text-center">
                         <!-- <button  class="btn btn-info">View</button> -->
-                        <button class="btn btn-primary">Edit</button>
+                        <button class="btn btn-primary"(click)="onEdit(dept)">Edit</button>
                         <button class="btn btn-danger mx-2">Delete</button>
                     </td>
                 </tr>
@@ -42,8 +42,8 @@
                 <input type="text" class="form-control" placeholder="department name" [(ngModel)]="newDeptObj.deptName">
             </div>
             <div class="col-12">
-                <label for="">Date Of Creation</label>
-                <input type="date" class="form-control" [(ngModel)]="newDeptObj.createdDate">
+                <label for="" *ngIf="newDeptObj.deptId==0">Date Of Creation</label>
+                <input type="date" class="form-control" [(ngModel)]="newDeptObj.createdDate" *ngIf="newDeptObj.deptId==0">
             </div>
         </div>
         <div class="row pt-3">
@@ -51,10 +51,10 @@
                 <button class="btn btn-secondary">Reset</button>
             </div>
             <div class="col-6 text-center">
-                <button class="btn btn-success" (click)="saveDept()">Save Dept</button>
+                <button [ngClass]="newDeptObj.deptId==0?'btn btn-success':'btn btn-warning'" (click)="saveDept()">{{newDeptObj.deptId==0 ?'Save Dept':'Update Dept'}}</button>
             </div>
         </div>
-        {{newDeptObj|json}}
+        <!-- {{newDeptObj|json}} -->
       </div>
     </div>
   </div>

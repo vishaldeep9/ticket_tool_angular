@@ -36,6 +36,9 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  onEdit(dept: any){
+    this.newDeptObj=dept;
+  }
   getAllDeptList() {
     this.masterService.getAllDepartment().subscribe((response) => {
       debugger;
