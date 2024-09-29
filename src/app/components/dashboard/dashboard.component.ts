@@ -26,13 +26,13 @@ export class DashboardComponent implements OnInit {
         alert(`Department Created Successfully`);
         this.getAllDeptList();
         // after form submission, doing form field empty
-        this.newDeptObj={
+        this.newDeptObj = {
           deptId: 0,
           deptName: '',
           deptHeadEmpId: 0,
           createdDate: '',
         };
-      }else{
+      } else {
         alert(res.message);
       }
     });
@@ -44,20 +44,33 @@ export class DashboardComponent implements OnInit {
       if (res.result) {
         alert(`Department Updated Successfully`);
         this.getAllDeptList();
-        this.newDeptObj={
+        this.newDeptObj = {
           deptId: 0,
           deptName: '',
           deptHeadEmpId: 0,
           createdDate: '',
         };
-      }else{
+      } else {
         alert(res.message);
       }
     });
   }
-  onEdit(dept: any){
-    this.newDeptObj=dept;
-    
+  onEdit(dept: any) {
+    this.newDeptObj = dept;
+  }
+  onDelete(deptId: number) {
+    if (confirm(`Are you sure want to delete?`)) {
+      debugger;
+      this.masterService.deleteDepartmentById(deptId).subscribe((res) => {
+        debugger;
+        if (res.result) {
+          alert(`Department Deleted Successfully`);
+          this.getAllDeptList();
+        } else {
+          alert(res.message);
+        }
+      });
+    }
   }
   getAllDeptList() {
     this.masterService.getAllDepartment().subscribe((response) => {

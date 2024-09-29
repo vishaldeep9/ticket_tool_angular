@@ -26,6 +26,7 @@ export class MasterService {
     return this.http.put(`${this.baseUrl}UpdateDepartment`, object);
   }
   deleteDepartmentById(id:number): Observable<any> {
-    return this.http.get(`${this.baseUrl}DeleteDepartment?id=${id}`);
+    debugger;
+    return this.http.delete(`${this.baseUrl}DeleteDepartment?id=${id}`);
   }
 }
