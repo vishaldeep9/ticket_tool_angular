@@ -6,6 +6,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DepartmentComponent } from './components/department/department.component';
 import { ParentcategoryComponent } from './components/parentcategory/parentcategory.component';
 import { ChildcategoryComponent } from './components/childcategory/childcategory.component';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { NewTicketComponent } from './components/new-ticket/new-ticket.component';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
@@ -17,7 +20,10 @@ const routes: Routes = [
     {path:'department',component:DepartmentComponent},
     {path:'dashboard',component:DashboardComponent},
     {path:'parent-category',component:ParentcategoryComponent},
-    {path:'child-category',component:ChildcategoryComponent}
+    {path:'child-category',component:ChildcategoryComponent},
+    {path:'employee',component:EmployeeComponent},
+    {path:'new-ticket',component:NewTicketComponent},
+    {path:'ticket-list',component:TicketListComponent}
   ]},
 
 ];

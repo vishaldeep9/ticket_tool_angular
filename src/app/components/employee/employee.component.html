@@ -1,1 +1,131 @@
-<p>employee works!</p>
+<div class="row">
+    <!-- ---------This ---is---Table-------------- Part -->
+    <div class="col-12" *ngIf="!isNewView; else isNewViewTemplate">
+        <!-- col-8 ==> col-12 -->
+        <div class="card">
+            <div class="card-header bg-success">
+                <div class="row">
+                    <div class="col-6">
+                        Employee List
+                    </div>
+                    <!-- Here , After clicking on this it will change the current isNewView Value -->
+                    <div class="col-6">
+                        <button class="btn btn-warning" (click)="isNewView=!isNewView">Add New</button>
+                    </div>
+                
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SI NO</th>
+                                    <th>Name</th>
+                                    <th>Department Name</th>
+                                    <th>Contact No</th>
+                                    <th>Email Id</th>
+                                    <th>Role</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cat of gridList; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ cat.employeeName }}</td>
+                                    <td>{{ cat.deptName }}</td>
+                                    <td>{{cat.contactNo}}</td>
+                                    <td>{{cat.emailId}}</td>
+                                    <td>{{cat.role}}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary" (click)="onEdit(cat)">
+                                            Edit
+                                        </button>
+                                        <button class="btn btn-danger mx-2" (click)="onDelete(cat.employeeId)">
+                                            Delete</button>
+                                    </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ---------This ----is--Form-------------- Part -->
+    <ng-template #isNewViewTemplate>
+        <div class="col-12">
+            <!-- col-4 ==> col-12 -->
+            <div class="card">
+                <div class="card-header bg-success">
+                    <div class="row">
+                        <div class="col-6">
+                            New Employee
+                        </div>
+                <!-- Here , After clicking on this it will change the current isNewView Value -->
+                        <div class="col-6"style="cursor: pointer;" >
+                            <button class="btn btn-danger" (click)="isNewView=!isNewView">Go To List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <label for>Employee Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="newObj.employeeName" />
+                        </div>
+                        <div class="col-6">
+                            <label for>Contact No</label>
+                            <input type="text" class="form-control" [(ngModel)]="newObj.contactNo" />
+                        </div>
+                        <div class="col-6">
+                            <label for>Email Id</label>
+                            <input type="text" class="form-control" [(ngModel)]="newObj.emailId" />
+                        </div>
+
+                        <div class="col-6">
+                            <label for>Department</label>
+                            <select [(ngModel)]="newObj.deptId" class="form-select">
+                                <option value>Select Dept</option>
+                                <option [value]="dept.deptId" *ngFor="let dept of deptList">
+                                    {{ dept.deptName }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for>Roles</label>
+                            <!-- in Role there is not key value pair,only string is here  -->
+                            <select [(ngModel)]="newObj.role" class="form-select">
+                                <option value>Select Role</option>
+                                <option *ngFor="let role of roleList">
+                                    {{role }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for>Gender</label>
+                            <input type="radio" name="gender" value="Male" [(ngModel)]="newObj.gender" />Male
+                            <input type="radio" name="gender" value="Fe-Male" [(ngModel)]="newObj.gender" />Female
+                        </div>
+                        <div class="col-6">
+                            <label for>Password</label>
+                            <input type="text" class="form-control" [(ngModel)]="newObj.password" />
+                        </div>
+
+                        <div class="row pt-3">
+                            <div class="col-6 text-center">
+                                <button class="btn btn-secondary m-2">Reset</button>
+                                <button [ngClass]="newObj.employeeId == 0? 'btn btn-success': 'btn btn-warning'"
+                                    (click)="newObj.employeeId == 0 ? save() : update()" [disabled]="
+                                 newObj.employeeName.length == 0 || newObj.deptId== 0 || !newObj.role" >
+                                    {{newObj.employeeId == 0? "Save":"Update"}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>  

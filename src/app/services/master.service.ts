@@ -59,4 +59,27 @@ export class MasterService {
     debugger;
     return this.http.delete(`${this.baseUrl}DeleteChildCategory?id=${id}`);
   }
+  //^---------Employee-------------------------------------------
+  getAllRoles(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}GetAllRoles`);
+  }
+  getAllEmp(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}GetEmployees`);
+  }
+  createEmp(object: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}CreateEmployee`, object);
+  }
+  updateEmp(object: any): Observable<any> {
+    debugger;
+    return this.http.put(`${this.baseUrl}UpdateEmployee`, object);
+  }
+  deleteEmpById(id: number): Observable<any> {
+    debugger;
+    return this.http.delete(`${this.baseUrl}DeleteEmployee?id=${id}`);
+  }
+  //^ ------NewTIcket-----------------------------------
+  createTicket(object: any): Observable<any> {
+    debugger;
+    return this.http.post(`${this.baseUrl}CreateNewTicket`, object);
+  }
 }

@@ -7,6 +7,7 @@
         "createp",
         "deletec",
         "deletep",
+        "getc",
         "getp",
         "mynavbar",
         "Parentcategory",

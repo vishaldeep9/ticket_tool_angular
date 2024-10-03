@@ -1,1 +1,61 @@
-<p>new-ticket works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                New Ticket
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        <label for="">Select Severity</label>
+                        <select class="form-select"[(ngModel)]="newTicketObj.severity">
+                            <option value="">Select</option>
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <label for="">Select Dept</label>
+                        <select class="form-select" [(ngModel)]="newTicketObj.deptId">
+                            <option value="">Select</option>
+                            <option [value]="item.deptId" *ngFor="let item of deptList">{{item.deptName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- this is optional , bcz we are not using this field during new ticket creation -->
+                    <div class="col-3">
+                        <label for="">Select Parent Category</label>
+                        <select class="form-select" (change)="onCategoryChange()" [(ngModel)]="selectPCategory">
+                            <option value="">Select</option>
+                            <!-- bcz we are using categoryName not id during filtration of  cCategoryList & this dropdown is an independent bcz at the time of new ticket creation we are not using this-->
+                            <option [value]="item.categoryName" *ngFor="let item of pCategoryList">{{item.categoryName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <label for="">Select Child Category</label>
+                        <!-- this is dependent Dropdown, which is dependent on Parent -->
+                        <select class="form-select"[(ngModel)]="newTicketObj.childCategoryId">
+                            <option value="">Select</option>
+                            <option [value]="item.childCategoryId" *ngFor="let item of childFilterCategory">{{item.categoryName
+                                }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label>Ticket Details</label>
+                        <textarea class="form-control"[(ngModel)]="newTicketObj.requestDetails"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <button class="btn btn-success" (click)="onCreateTicket()">Create Ticket</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
