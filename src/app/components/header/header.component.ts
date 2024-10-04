@@ -8,6 +8,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
 
+  activeLink: string = '';  // Variable to store active link
+  // This method sets the active link
+  setActive(link: string) {
+    this.activeLink = link;
+  }
+
 constructor(private router:Router){}
   onLogOff(){
     localStorage.removeItem('ticketUser');

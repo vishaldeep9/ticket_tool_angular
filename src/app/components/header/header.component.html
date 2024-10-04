@@ -7,25 +7,25 @@
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item" >
-            <a class="nav-link active" routerLink="dashboard">Dashboard</a>
+            <a  [ngClass]="{'nav-link':true,'active':activeLink==='dashboard'}" routerLink="dashboard" (click)="setActive('dashboard')">Dashboard</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" routerLink="department">Department</a>
+            <a [ngClass]="{'nav-link':true,'active':activeLink==='department'}" routerLink="department" (click)="setActive('department')">Department</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" routerLink="parent-category">Parent Category</a>
+            <a [ngClass]="{'nav-link':true,'active':activeLink==='parent-category'}" routerLink="parent-category" (click)="setActive('parent-category')">Parent Category</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" routerLink="child-category">Child Category</a>
+            <a [ngClass]="{'nav-link':true,'active':activeLink==='child-category'}" routerLink="child-category" (click)="setActive('child-category')">Child Category</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" routerLink="employee">Employee</a>
+            <a [ngClass]="{'nav-link':true,'active':activeLink==='employee'}" routerLink="employee" (click)="setActive('employee')">Employee</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" routerLink="new-ticket">New Ticket</a>
+            <a [ngClass]="{'nav-link':true,'active':activeLink==='new-ticket'}" routerLink="new-ticket" (click)="setActive('new-ticket')">New Ticket</a>
           </li>
           <li class="nav-item" >
-            <a class="nav-link" routerLink="ticket-list">Ticket List</a>
+            <a [ngClass]="{'nav-link':true,'active':activeLink==='ticket-list'}" routerLink="ticket-list" (click)="setActive('ticket-list')">Ticket List</a>
           </li>
         </ul>
         <form class="d-flex">
