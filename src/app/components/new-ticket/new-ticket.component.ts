@@ -29,9 +29,10 @@ export class NewTicketComponent implements OnInit {
       const userData=JSON.parse(employeeData);
       this.newTicketObj.employeeId=userData.employeeId;
     }
-    this.getAllDept();
-    this.getpCategory();
-    this.getcCategory();
+    this.getDataFromForkJoin();
+    // this.getAllDept();
+    // this.getpCategory();
+    // this.getcCategory();
   }
 
   onCreateTicket(){
@@ -53,22 +54,36 @@ export class NewTicketComponent implements OnInit {
     this.childFilterCategory=this.cCategoryList.filter(x=>x.parentCategoryName==this.selectPCategory)
   }
 
-  getAllDept() {
-    this.masterService.getAllDepartment().subscribe((response) => {
-      this.deptList = response.data;
-    });
-  }
-  getpCategory() {
-    this.masterService.getAllpCategory().subscribe((res) => {
-      this.pCategoryList = res.data;
-      console.log("parentCategory",this.pCategoryList)
-    });
-  }
+   getDataFromForkJoin(){
+    this.masterService.getCombinedData().subscribe(([allDept,allPCategory,allCCategory])=>{
+      console.log("Departments:", allDept);
+      console.log("Parent Categories:", allPCategory);
+      console.log("Child Categories:", allCCategory);
+      this.deptList=allDept.data;
+      this.pCategoryList=allPCategory.data;
+      this.cCategoryList=allCCategory.data;
+    },(error)=>{
+      alert(`Error loading data', ${error}`);
+    }
+  )
+   }
 
-  getcCategory() {
-    this.masterService.getAllcCategory().subscribe((res) => {
-      this.cCategoryList = res.data;
-      console.log("ChildCategory",this.cCategoryList)
-    });
-  }
+  // getAllDept() {
+  //   this.masterService.getAllDepartment().subscribe((response) => {
+  //     this.deptList = response.data;
+  //   });
+  // }
+  // getpCategory() {
+  //   this.masterService.getAllpCategory().subscribe((res) => {
+  //     this.pCategoryList = res.data;
+  //     console.log("parentCategory",this.pCategoryList)
+  //   });
+  // }
+
+  // getcCategory() {
+  //   this.masterService.getAllcCategory().subscribe((res) => {
+  //     this.cCategoryList = res.data;
+  //     console.log("ChildCategory",this.cCategoryList)
+  //   });
+  // }
 }

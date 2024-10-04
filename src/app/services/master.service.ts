@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -81,5 +81,12 @@ export class MasterService {
   createTicket(object: any): Observable<any> {
     debugger;
     return this.http.post(`${this.baseUrl}CreateNewTicket`, object);
+  }
+  // ^--------forkJoin
+  getCombinedData(): Observable<any[]> {
+    const url1 = this.http.get<any>(`${this.baseUrl}GetDepartments`);
+    const url2 = this.http.get<any>(`${this.baseUrl}GetParentCategory`);
+    const url3 = this.http.get<any>(`${this.baseUrl}GetChildCategory`);
+    return forkJoin([url1, url2, url3]);
   }
 }
