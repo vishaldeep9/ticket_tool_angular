@@ -89,4 +89,22 @@ export class MasterService {
     const url3 = this.http.get<any>(`${this.baseUrl}GetChildCategory`);
     return forkJoin([url1, url2, url3]);
   }
+  // ^----------ticket-list-----------
+  getTicketsCreatedByLoggedEmp(empId: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}GetTicketsCreatedByEmpId?empId=${empId}`
+    );
+  }
+
+  getTicketsAssignedToEmp(empId: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}GetAssignedTicketsByEmpId?empId=${empId}`
+    );
+  }
+  startTicket(ticketId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}startTicket?id=${ticketId}`, {});
+  }
+  closetTicket(ticketId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}closeTicket?id=${ticketId}`, {});
+  }
 }

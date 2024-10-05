@@ -1,1 +1,83 @@
-<h2>Ticket List </h2>
+<div class="row">
+    <div class="col-12 text-center ">
+        <div class="btn-group">
+            <!-- Here , we can also use ngClass but Here we are using property binding with conditional statement -->
+            <button type="button" [class]="mode=='my-ticket'?'btn btn-success':'btn btn-primary'"
+                (click)="onModeChange('my-ticket')">My Ticket</button>
+            <button type="button" [class]="mode=='assigned-ticket'?'btn btn-success':'btn btn-primary'"
+                (click)="onModeChange('assigned-ticket') ">Assigned Ticket</button>
+        </div>
+    </div>
+    <!------------- table  ------>
+    <div class="row">
+        <div class="col-12" *ngIf="mode=='my-ticket';else assigned  ">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Ticket No</th>
+                        <th>Department</th>
+                        <th>Created By</th>
+                        <th>Contact No</th>
+                        <th>Created Date</th>
+                        <th>State</th>
+                        <th>Assigned To</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of ticketList">
+                        <td>{{t.ticketNo}}</td>
+                        <td>{{t.deptName}}</td>
+                        <td>{{t.createdByEmployee}}</td>
+                        <td>{{t.contactNo}}</td>
+                        <td>{{t.createdDate}}</td>
+                        <td>{{t.state}}</td>
+                        <td>{{t.assignedToEmployee}}</td>
+                        <td>{{t.parentCategory}}</td>
+                        <td>{{t.childCategory}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #assigned>
+          <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ticket No</th>
+                            <th>Department</th>
+                            <th>Created By</th>
+                            <th>Contact No</th>
+                            <th>Created Date</th>
+                            <th>State</th>
+                            <th>Category</th>
+                            <th>Sub Category</th>
+                            <th>Assigned To</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let t of ticketList">
+                            <td>{{t.ticketNo}}</td>
+                            <td>{{t.deptName}}</td>
+                            <td>{{t.employeeName}}</td>
+                            <td>{{t.contactNo}}</td>
+                            <td>{{t.createdDate}}</td>
+                            <td>{{t.state}}</td>
+                            <td>{{t.assignedToEmployee}}</td>
+                            <td>{{t.parentCategoryName}}</td>
+                            <td>{{t.childCategoryName}}</td>
+                            <td>
+                 <!-- before working on that ticket he has to start first -->
+                                <button class="btn btn-success" *ngIf="t.state=='Assigned'|| 'In-Progress'" (click)="t.state=='Assigned'?changeStatus('start',t.ticketId):changeStatus('close',t.ticketId)">{{t.state=="Assigned"?'Start':'Close'}}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </ng-template>
+    </div>
+</div>
